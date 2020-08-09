@@ -22,3 +22,13 @@
     ![The three stage compression pipeline](figures/three_stage_compression.png)
 
 + Hiện tại, do nhu cầu bản thân, mình sẽ tìm hiểu về phương pháp **pruning model** trước.  
+
+
+## 2. Network Pruning
+
++ Các bước thực hiện:
+    - First step: Learning the connectivity via normal network training.
+    - Second step: tỉa những kết nối của các trọng số nhỏ. Nguyên tắc: 
+        - Loại bỏ các trọng số  (weights) dưới mức ngưỡng **threshold**.
+    - Third step: học lại mô hình với các weights sau khi loại bỏ bớt các kết nối thưa thớt ở bước 2.
+
