@@ -11,18 +11,14 @@ from torch.utils.data import DataLoader
 import numpy as np
 
 #from PIL import Image
-#import transforms 
-from torchvision import transforms
-#from tensorboardX import SummaryWriter
 from conf import settings
 from utils import *
-
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-
 from torch.optim.lr_scheduler import _LRScheduler
+from torchvision import transforms
 
 
 class FindLR(_LRScheduler):
@@ -42,6 +38,7 @@ class FindLR(_LRScheduler):
     def get_lr(self):
 
         return [base_lr * (self.max_lr / base_lr) ** (self.last_epoch / (self.total_iters + 1e-32)) for base_lr in self.base_lrs]
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

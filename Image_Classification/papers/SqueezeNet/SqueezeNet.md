@@ -85,6 +85,12 @@
         - **S_1x1**: the number of filters in the squeeze layer.
     - An *expand* layer: mix of 1x1 & 3x3 convolution filters. 
         - **E_1x1** and **E_3x3**: the number of filters (1x1) & (3x3) in the expand layer.
+        - Concatenate between *conv_filters (1x1)* and *conv_filters (3x3)*
+    - Compare *stack* & *cat*:
+        - *stack*: concatenate (~connected) sequence of tensors along **a new dimension**
+        - *cat*: Concatenates the given sequence of seq tensors in **the given dimension**
+
+        ![Concatenate_Stack](figures/cat_stack.png)
 
 + Set **S_1x1** < ( **E_1x1** + **E_3x3**): to limit the number of input channels to the 3x3 filters
 

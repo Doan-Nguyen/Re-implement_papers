@@ -15,7 +15,6 @@ class FireModule(nn.Module):
     Expand path:
         - 4 {conv(1x1) ; conv(3x3)}, ReLu
     """
-
     def __init__(self, in_channels, squeeze_channels, exp11_channels, exp33_channels):
         """
         Parameters:
@@ -33,66 +32,53 @@ class FireModule(nn.Module):
             nn.Conv2d(in_channels=squeeze_channels, out_channels=exp11_channels, kernel_size=1),
             nn.ReLU(inplace=True)
         )
-        self.expand__33 = nn.Sequential(
+        self.expand_33 = nn.Sequential(
             nn.Conv2d(in_channels=exp11_channels, out_channels=exp33_channels, kernel_size=3),
             nn.ReLU(inplace=True)
         )
 
     def forward(self, x):
-        x = squeeze_11(x)
-        x = expand_11(x)
-        x = expand_33(x)
-
+        x = self.squeeze_11(x)
+        x = torch.cat([self.expand_11(x), self.expand_33(x)], dim=1)  # horizontal
         return x
 
-class SqueezeNet(nn.Module):
+class SqueezeNetSimplePass(nn.Module):
+    """SqueezeNet with simple bypass"""
 
-    """mobile net with simple bypass"""
-    def __init__(self, num_class=58):
-
-        super().__init__()
-        self.stem = nn.Sequential(
-            nn.Conv2d(3, 96, 3, padding=1),
-            nn.BatchNorm2d(96),
+    def __init__(self, num_classes=1000):
+        super(SqueezeNetSimplePass, self).__init__()
+        self.num_classes = num_classes
+        ###     model architecture flows 'Table 1: SqueezeNet architectural dimensions'
+        self.features = nn.Sequential(
+            # input convolution
+            nn.Conv2d(in_channels=3, out_channels=96, kernel_size=7, stride=2),
             nn.ReLU(inplace=True),
-            nn.MaxPool2d(2, 2)
+            nn.MaxPool2d(kernel_size=3, stride=2),
+            # fire module
+            FireModule(in_channels=96, squeeze_channels=16, exp11_channels=64, exp33_channels=64),  # fire2
+            FireModule(in_channels=128, squeeze_channels=16, exp11_channels=64, exp33_channels=64),  # fire3
+            FireModule(in_channels=128, squeeze_channels=32, exp11_channels=128, exp33_channels=128),  # fire4
+            nn.MaxPool2d(kernel_size=3, stride=2),
+            FireModule(in_channels=256, squeeze_channels=32, exp11_channels=128, exp33_channels=128),  # fire5
+            FireModule(in_channels=256, squeeze_channels=48, exp11_channels=192, exp33_channels=192),  # fire6
+            FireModule(in_channels=384, squeeze_channels=48, exp11_channels=192, exp33_channels=192),  # fire7
+            FireModule(in_channels=384, squeeze_channels=64, exp11_channels=256, exp33_channels=256),  # fire8
+            nn.MaxPool2d(kernel_size=3, stride=2),
+            FireModule(in_channels=512, squeeze_channels=64, exp11_channels=256, exp33_channels=256),  # fire9  
+        )
+        self.classifier = nn.Sequential(
+            # output convolution: out_channels = numb_classes
+            nn.Conv2d(in_channels=512, out_channels=self.num_classes, kernel_size=1, stride=1),
+            nn.ReLU(inplace=True),  
+            nn.AdaptiveAvgPool2d(output_size=(1, 1))
         )
 
-        self.fire2 = Fire(96, 128, 16)
-        self.fire3 = Fire(128, 128, 16)
-        self.fire4 = Fire(128, 256, 32)
-        self.fire5 = Fire(256, 256, 32)
-        self.fire6 = Fire(256, 384, 48)
-        self.fire7 = Fire(384, 384, 48)
-        self.fire8 = Fire(384, 512, 64)
-        self.fire9 = Fire(512, 512, 64)
-
-        self.conv10 = nn.Conv2d(512, num_class, 1)
-        self.avg = nn.AdaptiveAvgPool2d(1)
-        self.maxpool = nn.MaxPool2d(2, 2)
-            
     def forward(self, x):
-        x = self.stem(x)
-
-        f2 = self.fire2(x)
-        f3 = self.fire3(f2) + f2
-        f4 = self.fire4(f3)
-        f4 = self.maxpool(f4)
-
-        f5 = self.fire5(f4) + f4
-        f6 = self.fire6(f5)
-        f7 = self.fire7(f6) + f6
-        f8 = self.fire8(f7)
-        f8 = self.maxpool(f8)
-
-        f9 = self.fire9(f8)
-        c10 = self.conv10(f9)
-
-        x = self.avg(c10)
-        x = x.view(x.size(0), -1)
-
+        x = self.features(x)
+        x = self.classifier(x)
         return x
 
+
 def squeezenet(num_classes=47):
-    return SqueezeNet(num_class=num_classes)
+    return SqueezeNetSimplePass(num_classes=num_classes)
 
