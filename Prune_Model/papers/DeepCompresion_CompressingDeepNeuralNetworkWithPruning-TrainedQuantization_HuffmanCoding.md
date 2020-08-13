@@ -32,3 +32,6 @@
         - Loại bỏ các trọng số  (weights) dưới mức ngưỡng **threshold**.
     - Third step: học lại mô hình với các weights sau khi loại bỏ bớt các kết nối thưa thớt ở bước 2.
 
++ Mở rộng nghiên cứu theo hướng *pruning model*, mình sẽ làm chi tiết bài 2 bài báo:
+    - [Pruning CNN for resource efficient inferrence](https://arxiv.org/abs/1611.06440)
+    - 
