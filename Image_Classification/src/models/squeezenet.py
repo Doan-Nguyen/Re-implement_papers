@@ -23,7 +23,6 @@ class FireModule(nn.Module):
             - squeeze_channels:
         """
         super(FireModule, self).__init__()
-        self.in_channels = in_channels
         ###
         self.squeeze_11 = nn.Sequential(
             nn.Conv2d(in_channels=in_channels, out_channels=squeeze_channels, kernel_size=1),
@@ -34,7 +33,7 @@ class FireModule(nn.Module):
             nn.ReLU(inplace=True)
         )
         self.expand_33 = nn.Sequential(
-            nn.Conv2d(in_channels=squeeze_channels, out_channels=exp33_channels, kernel_size=3, padding=1),
+            nn.Conv2d(in_channels=exp11_channels, out_channels=exp33_channels, kernel_size=3),
             nn.ReLU(inplace=True)
         )
 
@@ -46,7 +45,7 @@ class FireModule(nn.Module):
 class SqueezeNetSimplePass(nn.Module):
     """SqueezeNet with simple bypass"""
 
-    def __init__(self, num_classes=100):
+    def __init__(self, num_classes=1000):
         super(SqueezeNetSimplePass, self).__init__()
         self.num_classes = num_classes
         ###     model architecture flows 'Table 1: SqueezeNet architectural dimensions'
@@ -77,7 +76,7 @@ class SqueezeNetSimplePass(nn.Module):
     def forward(self, x):
         x = self.features(x)
         x = self.classifier(x)
-        return torch.flatten(x, 1)
+        return x
 
 
 def squeezenet(num_classes=47):

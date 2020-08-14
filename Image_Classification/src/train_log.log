@@ -1,8 +1,0 @@
-2020-08-14 09:41:33,995 - __main__ - INFO - Training Epoch:          1 [48/10000]	          Loss: 4.6033	LR: 0.000239
-2020-08-14 09:41:34,088 - __main__ - INFO - Training Epoch:          1 [96/10000]	          Loss: 4.6099	LR: 0.000478
-2020-08-14 09:41:34,180 - __main__ - INFO - Training Epoch:          1 [144/10000]	          Loss: 4.6073	LR: 0.000718
-2020-08-14 09:41:34,266 - __main__ - INFO - Training Epoch:          1 [192/10000]	          Loss: 4.5996	LR: 0.000957
-2020-08-14 09:41:37,245 - __main__ - INFO - Training Epoch:          1 [240/10000]	          Loss: 4.6093	LR: 0.001196
-2020-08-14 09:41:37,502 - __main__ - INFO - Training Epoch:          1 [288/10000]	          Loss: 4.6057	LR: 0.001435
-2020-08-14 09:41:37,587 - __main__ - INFO - Training Epoch:          1 [336/10000]	          Loss: 4.6063	LR: 0.001675
-2020-08-14 09:41:37,670 - __main__ - INFO - Training Epoch:          1 [384/10000]	          Loss: 4.6071	LR: 0.001914
