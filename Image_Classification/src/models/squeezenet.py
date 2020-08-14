@@ -23,6 +23,7 @@ class FireModule(nn.Module):
             - squeeze_channels:
         """
         super(FireModule, self).__init__()
+        self.in_channels = in_channels
         ###
         self.squeeze_11 = nn.Sequential(
             nn.Conv2d(in_channels=in_channels, out_channels=squeeze_channels, kernel_size=1),
@@ -33,7 +34,7 @@ class FireModule(nn.Module):
             nn.ReLU(inplace=True)
         )
         self.expand_33 = nn.Sequential(
-            nn.Conv2d(in_channels=exp11_channels, out_channels=exp33_channels, kernel_size=3),
+            nn.Conv2d(in_channels=squeeze_channels, out_channels=exp33_channels, kernel_size=3, padding=1),
             nn.ReLU(inplace=True)
         )
 
@@ -76,7 +77,7 @@ class SqueezeNetSimplePass(nn.Module):
     def forward(self, x):
         x = self.features(x)
         x = self.classifier(x)
-        return x
+        return torch.flatten(x, 1)
 
 
 def squeezenet(num_classes=47):
