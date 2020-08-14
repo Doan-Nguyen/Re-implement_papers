@@ -147,9 +147,9 @@ if __name__ == '__main__':
     
     #   Log infor modularity to Pytorch models & optimizer
     for param_tensor in net.state_dict():       
-        logger.info(param_tensor, "\t", net.state_dict()[param_tensor].size)
+        logger.info(f'{param_tensor}, "\t", {net.state_dict()[param_tensor].size}')
     for var_name in optimizer.state_dict():
-        logger.info(var_name, "\t", optimizer.state_dict()[var_name])
+        logger.info(f'{var_name}, "\t", {optimizer.state_dict()[var_name]}')
     #   
     train_scheduler = optim.lr_scheduler.MultiStepLR(optimizer, 
                 milestones=global_settings.MILESTONES, gamma=0.2) #learning rate decay
