@@ -19,7 +19,11 @@
     
     ![Transform to vectors](figures/transforms.png)
 
-## Vector protection
 
+# Changing the reference frame
 
-#
+## Changing basis
+
++ Thay các đơn vị i, j bằng các ma trận đơn vị *e_1=(1, 0)*, *e_2=(0, 1)*. Biểu diễn bất kì vector bằng các ma trận đơn vị.
+
+![Changing basic](figures/changing_basic1.png)
