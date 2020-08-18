@@ -34,7 +34,7 @@ class FireModule(nn.Module):
             nn.ReLU(inplace=True)
         )
         self.expand_33 = nn.Sequential(
-            nn.Conv2d(in_channels=squeeze_channels, out_channels=exp33_channels, kernel_size=3, padding=1),
+            nn.Conv2d(in_channels=squeeze_channels, out_channels=exp33_channels, kernel_size=3), # , padding=1
             nn.ReLU(inplace=True)
         )
 
