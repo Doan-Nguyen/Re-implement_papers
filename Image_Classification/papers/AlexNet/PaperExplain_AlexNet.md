@@ -62,9 +62,6 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 + Sử dụng *Overlap pooling* nhằm giảm kích thước mạng.
 
-### 1.4 Đóng góp chính của paper 
-
-
 ### 1.6 Fine-turning model 
 
 
@@ -73,6 +70,8 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 ### 2.1 Dataloader 
 
 ### 2.2 Re-build & debug model
+
++ 
 
 ### 2.3 Training model 
 
