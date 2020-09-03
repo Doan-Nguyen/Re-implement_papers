@@ -5,9 +5,7 @@
 
 Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đề cập đến trong paper. Deeper !
 
-### 0.1 
-
-#### 0.1.1 Non-Saturating & Saturating neurons
+### 0.1 Non-Saturating & Saturating neurons
 
 + Hầu hết các kiến trúc mạng neuron trong machine learning sử dụng hàm kích hoạt phi tuyến tính cho việc kết hợp các đầu vào tuyến tính. Công thức phổ biến mọi người biết đến: 
 
@@ -19,9 +17,6 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 + Hiện tượng bão hòa này gây ra tốn thời gian cập nhật trọng số  (update the weights) vì giá trị của gradient rất nhỏ.
 + Cải tiến lớn nhất của ReLU là khắc phục hiện tường bão hòa của gradient
 
-#### 0.1.2 ReLU Non-saturating
-
-+ Ngoài ra, mình có viết bài chi tiết về **activation functions** tại [đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/blob/master/Topics/Activations%20Functions.md).
 
 ### 0.2 Overfitting, Drop-out 
 
@@ -38,7 +33,7 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 + Nhằm giảm thời gian training, bài báo đề xuất sử dụng non-saturating neurons.
 
-+ Hạn chế hiện tượng over-fitting tại lớp fully-connected, tác giả sử dụng phương pháp **dropout** thay cho regularisation. 
++ Hạn chế hiện tượng over-fitting tại lớp fully-connected, tác giả sử dụng phương pháp regularization **dropout**. 
 
 + Cấu trúc mạng AlexNet khá tương đồng với LeNet:
     - Kích thước của convolution layers giảm dần. 
@@ -48,22 +43,15 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 ![LeNet vs AlexNet](figures/lenet_alexnet.png)
 
-### 1.3 Các đề xuất của thuật toán 
+### 1.2 Các hướng giải quyết 
 
-+ AlexNet thay thế hàm kích hoạt *sigmoid()* bằng hàm *ReLU()*. Giúp giảm thời gian training xuống 25%.
-
-![Instead sigmoid by ReLU](figures/instead_sigmoid_relu.png)
-
-+ Giải quyết vấn đề overfitting bằng:
-    - Data augmentation
-    - Dropout
-
-+ Sử dụng *Local Response Normalization* nhằm 
-
-+ Sử dụng *Overlap pooling* nhằm giảm kích thước mạng.
+### 1.3 Cách thuật toán đề xuất 
 
 ### 1.4 Đóng góp chính của paper 
 
+### 1.5 Kiến trúc mạng 
+
++  
 
 ### 1.6 Fine-turning model 
 
