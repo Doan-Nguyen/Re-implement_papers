@@ -9,7 +9,7 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 + Hầu hết các kiến trúc mạng neuron trong machine learning sử dụng hàm kích hoạt phi tuyến tính cho việc kết hợp các đầu vào tuyến tính. Công thức phổ biến mọi người biết đến: 
 
-<img src="https://render.githubusercontent.com/render/math?math=g(b_j + sum_{i}(w_i,_jx_j))">
+    <img src="https://render.githubusercontent.com/render/math?math=g(b_j + sum_{i}(w_i,_jx_j))">
 
 
 + Hiện tượng bão hòa xảy khi các hàm kích hoạt đạt giá trị cận biên trên/biên dưới.  
