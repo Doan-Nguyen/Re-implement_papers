@@ -2,7 +2,7 @@
 
 ## I. Các kiến thức cần làm rõ 
 
-+ Nhiều phết, mình tham khảo bài viết của anh Phạm Đình Khánh & có bổ sung thêm. [Link]()
++ Mình tham khảo bài viết của anh Phạm Đình Khánh (Sorry anh, nếu đọc sai tên anh). [Link](https://phamdinhkhanh.github.io/2020/06/10/ImageSegmention.html#4-thu%E1%BA%ADt-ng%E1%BB%AF)
 
 
 ## 0. Abstract
