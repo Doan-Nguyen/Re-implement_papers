@@ -1,13 +1,21 @@
 # U-Net: Convolutional Networks for Biomedical Image Segmentation
 
+## I. Các kiến thức cần làm rõ 
+
++ Nhiều phết, mình tham khảo bài viết của anh Phạm Đình Khánh & có bổ sung thêm. [Link]()
+
 
 ## 0. Abstract
 
-+ The architecture consists:
++ Kiến trúc mạng U-Net gồm 2 phần
 
-    - A **contracting path** to capture context
+    - Phần thu hẹp **contracting path**: 
+        - Trích lọc đặc trưng để tìm ra nội dung phần ảnh.
+        - Gọi là thu hẹp vì kích thước dài & rộng của các layers giảm dần ([572x572] -> [32x32]) 
 
-    - A symmetric **expanding path** that enables precise localization. *Connect features*.
+    - Phần mở rộng **expanding path**:
+        - Tóm lược/phân tích vị trí.
+        - Gọi là mở rộng vì kích thước dài & rộng của các layers tăng dần ([32x32] -> [572x572]) 
 
 + ? **Padding method**
 
