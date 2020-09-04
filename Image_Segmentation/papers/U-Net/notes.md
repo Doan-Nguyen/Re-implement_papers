@@ -41,7 +41,6 @@
 
 ![Network flow algorithms](./figures/network_flow.png)
 
-
 ### 2.1 Contracting path
 
 + 2 x [Convolutions (3x3) -> ReLU -> MaxPooling (stride=2)]
@@ -78,7 +77,6 @@
 
 ![Up-sampling low to high resolution](./figures/up_sampling_1.png)
 
-
 + Transposed Convolution:
 
     - To extract features in the encoder & restores the original image size in the decoder.
@@ -87,13 +85,11 @@
 
 ![Many-to-one relationship](./figures/many_to_one.png)
 
-
 + With **Backward** to find associate 1 value in a matrix to 9 values in another matrix.
 
     - *one-to-many relationship* ~ core idea of **transposed convolution**
 
 ![One-to-many relationship](./figures/one_to_many.png)
-
 
 + Convolution Matrix *(4x4)->(2x2)*
 
@@ -105,7 +101,6 @@
 
 ![Convolution matrix](./figures/convolution_matrix.png)
 
-
 + Transposed convolution matrix *(2x2)->(4x4)*:
 
     - Step by step:
@@ -114,9 +109,7 @@
 
         - Convolution Transpose matrix (16x4) * Column vector (4x1) => output matrix (16x1) 
 
-
 ![Transposed convolution matrix](./figures/transposed_convolution_matrix.png)
-
 
 
 ## 3. Training
@@ -125,11 +118,11 @@
 
 ![The energy & loss function](./figures/energy_loss_func.png)
 
-
 ![Soft max](./figures/soft_max.png)
-
 
 ![Cross_Entropy](./figures/cross_entropy.png)
 
 
+## Tài liệu tham khảo 
 
+1. [Image Segmentation](https://phamdinhkhanh.github.io/2020/06/10/ImageSegmention.html#4-thu%E1%BA%ADt-ng%E1%BB%AF)
