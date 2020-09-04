@@ -4,9 +4,21 @@
 ## I.Các kiến thức cần làm rõ 
 
 ###  Các thành phần trong mạng U-Net 
-+ En-coder & de-coder
+
++ Anh Phạm Đình Khánh viết 1 bài chi tiết ở [đây](https://phamdinhkhanh.github.io/2020/06/10/ImageSegmention.html#4-thu%E1%BA%ADt-ng%E1%BB%AF)
 
 ### Ảnh hưởng của việc sử dụng Initialize Weights
+
+#### Tầm quan trọng của việc khởi tạo trọng số 
++ Giúp ngăn chặn hàm kích hoạt của lớp xảy ra hiện tượng *exploding & vanishing gradient*.
++ Giúp cải thiện việc tối ưu thuật toán
++ Tăng tốc độ hội tụ mô hình.
+
+#### Một vài lưu ý khi khởi tạo trọng số 
++ Không khởi tạo toàn bộ trọng số có giá trị 0 hoặc cùng một giá trị
++ Không khởi tạo trọng số quá lớn vì có thể xảy ra hiện tượng bão hòa (*Saturation problem*) từ đó dẫn đến suy hao đạo hàm (*Vanishing Gradient*).
+    - Vanishing gradient: xảy ra khi giá trị gradient nhỏ dần đều (becomes close to zeros) qua mỗi lần tính backpropagation. Độ thay đổi của weights không đáng kể -> mô hình k hội tụ được. [Link tham khảo thêm](https://towardsdatascience.com/the-vanishing-gradient-problem-69bf08b15484)
++ Mình có viết một bài chi tiết hơn về **Initializer Weights** [tại đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/tree/master/Topics/Initialize_Weights).
 
 ### Kiến trúc VGG 
 
