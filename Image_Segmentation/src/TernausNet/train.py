@@ -20,13 +20,15 @@ if __name__ == '__main__':
     # device = torch.device('cuda' if torch.cuda.is_available() )
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     logging.info(f'Using deveice {device}')
-    
-    # Change here to adapt to your data
-    # n_channels=3 for RGB images
-    # n_classes is the number of probabilities you want to get per pixel
-    #   - For 1 class and background, use n_classes=1
-    #   - For 2 classes, use n_classes=1
-    #   - For N > 2 classes, use n_classes=N
+
+    """
+    Change here to adapt to your data
+    n_channels=3 for RGB images
+    n_classes is the number of probabilities you want to get per pixel
+      - For 1 class and background, use n_classes=1
+      - For 2 classes, use n_classes=1
+      - For N > 2 classes, use n_classes=N
+    """
     net = UNet(n_channels=3, n_classes=1, bilinear=True)
     print("11111")
     logging.info(f'Network:\n'
