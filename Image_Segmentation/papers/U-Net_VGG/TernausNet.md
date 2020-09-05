@@ -72,11 +72,22 @@
 #### 3.2 Encoder 
 + Tác giả đã thay đổi kiến trúc mạng VGG-11 để đảm nhiệm vai trò Encoder:
     - Loại bỏ toàn bộ các lớp *fully-connected layers* & thay thế bởi *conv_layer(1x1)*
+    - Kết nối các *conv_layer* ở phần encoder với 
 
 ![VGG11](figures/vgg11.png)
 
 
-+ Đề xuất cải tiến:
+#### 3.2 Decoder
++ Phạm vi của một khối decoder block:
+    - [ConvTranspose2d -> conv(2x2)]
++ Cách tính các tham số  thành phần của 1 block decoder(in_channels, mid_channels, out_channels):
+    - in_channels: tổng 2 conv_channels trong khối con2d_transpose
+    - mid_channels: conv_channels của conv(3x3)
+    - out_channels: conv_channels của conv_layers đầu tiên trong khối con2d_transpose kế tiếp 
++ Concatenate: Nối 2 lớp trong mạng UNet
+    - torch.cat([input, output], 1)
+        - input: ConvTranspose2d layer 
+        - output: in encoder
 
 
 ## III. Tài liệu tham khảo
