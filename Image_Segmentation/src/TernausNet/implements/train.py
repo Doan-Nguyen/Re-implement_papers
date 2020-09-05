@@ -1,15 +1,18 @@
 #
 from tqdm import tqdm
 import logging
-
+import sys
 #
 from torch import optim
 import torch.nn as nn 
 import torch
 # 
-from ..models.unet import UNet
-from ..configs import * 
-from ..utils.datasets import dataloader
+sys.path.append('../networks')
+import unet_vgg
+sys.path.append('../')
+import configs, configs_param
+sys.path.append('../utils')
+import *
 
 
 def train(
