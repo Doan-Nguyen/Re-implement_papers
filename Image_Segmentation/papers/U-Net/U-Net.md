@@ -14,7 +14,7 @@
         - Gọi là thu hẹp vì kích thước dài & rộng của các layers giảm dần ([572x572] -> [32x32]) 
 
     - Phần mở rộng **expanding path**:
-        - Tóm lược/phân tích vị trí.
+        - Tóm lược/phân tích vị trí vùng segmentation.
         - Gọi là mở rộng vì kích thước dài & rộng của các layers tăng dần ([32x32] -> [572x572]) 
 
 + ? **Padding method**
