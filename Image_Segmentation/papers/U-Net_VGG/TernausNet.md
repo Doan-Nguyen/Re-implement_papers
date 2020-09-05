@@ -47,6 +47,7 @@
 
 ### 3. Network Architecture 
 
+#### 3.1 U-Net
 + U-Net gồm 2 phần chính + 1 phần phụ:
     - Phần kết nối 
     - Phần mở rộng 
@@ -68,11 +69,17 @@
 
 + Một bài viết chi tiết về việc xây dựng U-Net. [Link](https://medium.com/datadriveninvestor/an-overview-on-u-net-architecture-d6caabf7caa4)
 
+#### 3.2 Encoder 
++ Tác giả đã thay đổi kiến trúc mạng VGG-11 để đảm nhiệm vai trò Encoder:
+    - Loại bỏ toàn bộ các lớp *fully-connected layers* & thay thế bởi *conv_layer(1x1)*
+
+![VGG11](figures/vgg11.png)
+
 
 + Đề xuất cải tiến:
 
 
-## Tài liệu tham khảo
+## III. Tài liệu tham khảo
 
 1. [Image Segmentation](https://phamdinhkhanh.github.io/)
 2. [What is skip architecture in CNN?](https://www.quora.com/What-is-skip-architecture-in-CNN)
