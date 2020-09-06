@@ -1,13 +1,32 @@
 import os 
 import argparse
+from datetime import datetime
+
+###         Path
+CHECKPOINT_PATH = './checkpoint'
+DATASET_FOLDER = '/media/doannn/Data/Self/Datasets/Bone-Gum_Lines'
+TRAIN_FOLDER = os.path.join(DATASET_FOLDER, "imgs_results")
+MASK_FOLDER = os.path.join(DATASET_FOLDER, "masks_results")
+#   Tensorboard log dir
+LOG_DIR = 'runs'
 
 
-num_workers = 4
-val_percent = 0.1
-batch_size = 4
-dataset_path = '/media/doannn/Data/Self/Datasets/Bone-Gum_Lines'
-img_path = os.path.join(dataset_path, 'imgs_results')
-mask_path = os.path.join(dataset_path, 'masks_results')
+###             Model parameters
+EPOCHS = 200
+SAVE_EPOCHS = 20      #  save weights file per SAVE_EPOCH epoch
+START_EPOCHS = 101   # start epoch for resume training
+NEW_EPOCH = 50
+
+#   Mean and std of cifar100 dataset
+TRAIN_MEAN = (0.5070751592371323, 0.48654887331495095, 0.4409178433670343)
+TRAIN_STD = (0.2673342858792401, 0.2564384629170883, 0.27615047132568404) 
+#  Dataloader
+NUMB_CLASSES = 2
+NUM_WORKERS = 4
+
+VAL_PERCENT = 10.0
+BATCH_SIZE = 32
+
 
 def get_args():
     """

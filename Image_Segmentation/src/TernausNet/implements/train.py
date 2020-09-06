@@ -8,11 +8,11 @@ import torch.nn as nn
 import torch
 # 
 sys.path.append('../networks')
-import unet_vgg
+import networks.unet_vgg
 sys.path.append('../')
 import configs, configs_param
 sys.path.append('../utils')
-import *
+import datasets
 
 
 def train(

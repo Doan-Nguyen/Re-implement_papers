@@ -13,7 +13,7 @@ from torch.utils.data import DataLoader, random_split, Dataset
 import sys
 
 # local applications 
-import configs_param
+import configs
 
 
 class BasicDatasets(Dataset):

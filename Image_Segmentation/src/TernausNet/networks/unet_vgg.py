@@ -22,7 +22,7 @@ class UNet_VGG11(nn.Module):
             - num_filters:
             - pretrained: 
         """
-        super(UNet_Vgg11, self).__init__()
+        super(UNet_VGG11, self).__init__()
         ###
         self.pool = nn.MaxPool2d(kernel_size=2)
         ###          Encoder path

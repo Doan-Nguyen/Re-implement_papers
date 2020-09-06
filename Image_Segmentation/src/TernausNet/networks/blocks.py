@@ -12,7 +12,7 @@ def conv3x3(in_channels: int, out_channels: int) -> nn.Module:
 class ConvRelu(nn.Module):
     """     The path Conv-ReLU in decoder path.     """
     def __init__(self, in_c: int, out_c: int) -> None:
-        super(self, ConvRelu).__init__()
+        super(ConvRelu, self).__init__()
         ##   Modify architecture
         self.conv = conv3x3(in_c, out_c)
         self.activattion = nn.ReLU(inplace=True)
@@ -45,13 +45,3 @@ class Decoder(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.decoder_block(x)
         return x
-
-
-
-
-
-
-
-
-
-
