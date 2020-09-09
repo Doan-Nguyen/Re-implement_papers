@@ -1,5 +1,9 @@
 # Very Deep Convolutional Networks for Larger-Scale Image Recognition
 
+
+## 0. Giải thích các khái niệm 
+
+
 ## Abstract
 
 ## 1. Introduction
