@@ -27,7 +27,6 @@ class UNet_VGG11(nn.Module):
         self.pool = nn.MaxPool2d(kernel_size=2)
         ###          Encoder path
         self.encoder = models.vgg11(pretrained=pretrained).features
-
         self.relu = self.encoder[1]     # take one relu layer
         self.conv1 = self.encoder[0]
         self.conv2 = self.encoder[3]
@@ -73,7 +72,6 @@ class UNet_VGG11(nn.Module):
         ###         Center path
         center = self.relu(self.center(x))
         ###         Decoder path
-
         decoder5 = self.decoder_5(torch.cat([conv5_2, center], 1))
         decoder4 = self.decoder_4(torch.cat([decoder5, conv4_2], 1))
         decoder3 = self.decoder_3(torch.cat([decoder4, conv3_2], 1))
