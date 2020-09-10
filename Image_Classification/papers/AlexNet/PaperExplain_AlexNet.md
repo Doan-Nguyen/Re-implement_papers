@@ -16,14 +16,25 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 ![Activation functions](figures/Activation_functions.png)
 
 + Hiện tượng bão hòa xảy khi các hàm kích hoạt đạt giá trị cận biên trên/biên dưới ứng với mỗi vùng hoạt động của hàm kích hoạt. Ví dụ: tanh() có giá trị trong khoảng [-1, 1]; softmax() có gía trị trong khoảng [0, 1]. 
-+ Hiện tượng bão hòa này gây ra tốn thời gian cập nhật trọng số  (update the weights) vì giá trị của gradient rất nhỏ.
-+ Cải tiến lớn nhất của ReLU là khắc phục hiện tường bão hòa của gradient
 
-#### 0.1.2 ReLU Non-saturating
++ Hiện tượng bão hòa này gây ra tốn thời gian cập nhật trọng số  (update the weights) vì giá trị của gradient rất nhỏ. Để xuất giải quyết vấn đề này, hiện nay nhiều mô hình hiện đại sử dụng cấu trúc khối Conv {Conv -> MaxPooling -> ReLU}
 
 + Ngoài ra, mình có viết bài chi tiết về **activation functions** tại [đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/blob/master/Topics/Activations%20Functions.md).
 
-### 0.2 Overfitting, Drop-out 
+### 0.2 Overfitting & Drop-out 
+
+#### 0.2.1 Overfitting 
++ Overfitting có thể hiệu mô hình học tốt trên tập train, nhưng kết quả trên tập valid lại không tốt. Một ví dụ thường được dùng để mô tả hiện tương này trong đời thực là việc học tủ. Hiện tượng này có thể do mô hình quá phức tạp trong khi dữ liệu training lại nhỏ.
+
++ Cách thức phát hiện/đánh giá *overfitting*:
+    - Trước tiên, ta cần đánh giá chất lượng mô hình trên tập train & tập valid. Thường sẽ dùng *lỗi trung bình bình phương* (**Mean Squared Error**). Với classification, người ta cũng có thể sử dụng **cross entropy**.
+    - Overfitting <=> E_train nhỏ; E_valid lớn
+    - Underfitting <=> E_train lớn; E_valid nhỏ
+
++ Cách thức giải quyết:
+
+#### 0.2.2 Drop-out 
++ Được hiểu là kĩ thuật giúp ẩn đi các unit trong mô hình. Việc ẩn ở đây được hiểu các unit sẽ có giá trị 0.
 
 ### 0.3 Highly-optimized GPU implementation 4 (section 3)
 
