@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import namedtuple
 import torch
 import torch.nn as nn
 import torch.nn.init as init
@@ -41,11 +42,11 @@ class VGG16_BN(nn.Module):
 
         self.slice3 = torch.nn.Sequential()
         for x in range(19, 29):
-            self.slice3.add_module(str(x))
+            self.slice3.add_module(str(x), vgg_pretrained_features[x])
 
         self.slice4 = torch.nn.Sequential()
         for x in range(29, 39):
-            self.slice3.add_module(str(x))
+            self.slice3.add_module(str(x), vgg_pretrained_features[x])
         ## fc6, fc7
         self.slice5 = torch.nn.Sequential(
                 nn.MaxPool2d(kernel_size=3, stride=1, padding=1),

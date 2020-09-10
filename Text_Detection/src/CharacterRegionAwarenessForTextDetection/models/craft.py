@@ -41,7 +41,7 @@ class CRAFT(nn.Module):
         self.upconv1 = DoubleConv(in_ch=1024, mid_ch=512, out_ch=256)  ## bug ?
         self.upconv2 = DoubleConv(in_ch=512, mid_ch=256, out_ch=128)
         self.upconv3 = DoubleConv(in_ch=256, mid_ch=128, out_ch=64)
-        self.upconv3 = DoubleConv(in_ch=128, mid_ch=64, out_ch=32)
+        self.upconv4 = DoubleConv(in_ch=128, mid_ch=64, out_ch=32)
 
         num_class = 2
         self.conv_classifier = nn.Sequential(
