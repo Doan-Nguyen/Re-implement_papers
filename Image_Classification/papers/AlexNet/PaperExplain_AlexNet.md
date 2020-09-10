@@ -82,7 +82,17 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 ### 2.2 Re-build & debug model
 
-+ 
++ Kiến trúc mạng AlexNet gồm 8 lớp (5 **Convolutional Layers** + 3 **Fully Connected Layers**):
+    - 5 Convolutional Layers:
+        - Hai lớp conv đầu tiên & lớp thứ 5 được kết nối thêm **Overlapping MaxPooling Layers**
+        - Ba lớp conv cuối được nối trực tiếp với nhau
+    - 3 Fully Connected Layers:
+        - 2 Fully Connected Layers 
+        - 1 SoftMax layer
++ ReLU non-linearity được sử dụng cho tất các conv layers & fully connected layers.
+
++ **Overlapping MaxPooling Layers**:
+    - Thường được sử dụng nhằm giảm kích thước chiều rộng & chiều cao của tensor đầu vào nhưng vẫn giữ được độ sâu. 
 
 ### 2.3 Training model 
 
@@ -100,3 +110,5 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 + [Why would a saturated neuron be a problem?](https://www.quora.com/Why-would-a-saturated-neuron-be-a-problem)
 
 + [What Is Saturating Gradient Problem](https://datascience.stackexchange.com/questions/27665/what-is-saturating-gradient-problem#:~:text=Saturating%20means%20that%20after%20some,a%20solution%20for%20this%20problem.)
+
+[Understanding AlexNet](https://www.learnopencv.com/understanding-alexnet/#:~:text=AlexNet%20consists%20of%205%20Convolutional,kernels%20of%20the%20same%20size.)
