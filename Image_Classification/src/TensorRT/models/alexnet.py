@@ -23,7 +23,7 @@ def AlexNet():
     model = tf.keras.Sequential([
         ###             First convolution layer
         layers.Conv2D(
-                    filter=96, 
+                    filters=96, 
                     kernel_size=11,
                     strides=4, 
                     padding='valid', 
@@ -38,16 +38,16 @@ def AlexNet():
         layers.BatchNormalization(),
         ###             Second convolution layer
         layers.Conv2D(
-                    filter=256,
+                    filters=256,
                     kernel_size=5,
                     strides=1,
-                    padding=2, # padding='same'
+                    padding='same', # padding='same'
                     activation=tf.keras.activations.relu
         ),
         layers.MaxPooling2D(
                     pool_size=3,
                     strides=2,
-                    padding='valid'
+                    padding='same'
         ),
         layers.BatchNormalization(),
         ###             Third convolution layer
@@ -55,29 +55,29 @@ def AlexNet():
                     filters=384,
                     kernel_size=3, 
                     strides=1,
-                    padding=1,
+                    padding='same',
                     activation=tf.keras.activations.relu
         ),
-        ###         Four convolution layer
+        ###         4th convolution layer
         layers.Conv2D(
                     filters=384,
                     kernel_size=3,
                     strides=1,
-                    padding=1,
+                    padding='same',
                     activation=tf.keras.activations.relu
         ),
         ###         Fith convolution layer
         layers.Conv2D(
                     filters=256, 
                     kernel_size=3, 
-                    padding=1, 
+                    padding='same', 
                     strides=1,
                     activation=tf.keras.activations.relu
         ),
         layers.MaxPooling2D(
                     pool_size=3,
                     strides=2,
-                    padding='valid'
+                    padding='same'
         ),
         layers.BatchNormalization(),
         ###         6th fully connected layer

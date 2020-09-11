@@ -1,3 +1,8 @@
+"""  
+Copyright (c) 2019-present NAVER Corp.
+MIT License
+"""
+
 # -*- coding: utf-8 -*-
 import logging
 
@@ -5,7 +10,7 @@ import torch
 import torch.nn as nn 
 import torch.nn.functional as F 
 
-from vgg_bn import init_weights, VGG16_BN
+from models.vgg_bn import init_weights, VGG16_BN
 
 ###         Logging for debug model
 logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.DEBUG)

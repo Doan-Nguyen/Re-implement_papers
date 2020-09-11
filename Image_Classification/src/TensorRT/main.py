@@ -2,6 +2,7 @@
 from __future__ import absolute_import, division, print_function
 import sys 
 import os 
+import datetime
 #   framework
 import tensorflow as tf
 import tensorflow.keras as keras
@@ -18,8 +19,8 @@ def get_model():
     model = AlexNet()
 
     model.compile(
-        loss=tf.keras.losses.categorical_crossentropy,
-        optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+        loss=keras.losses.categorical_crossentropy,
+        optimizer=keras.optimizers.Adam(learning_rate=0.001),
         metrics=['accuracy']
     )
     return model
