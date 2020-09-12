@@ -36,30 +36,29 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 #### 0.2.2 Drop-out 
 + Được hiểu là kĩ thuật giúp ẩn đi các unit trong mô hình. Việc ẩn ở đây được hiểu các unit sẽ có giá trị 0.
 
-### 0.3 Highly-optimized GPU implementation 4 (section 3)
+### 0.3 Local Response Normalization
 
-### 0.4 Several effective techniques for preventing overfitting (section 4)
-
-### 0.5 Unusual features
+### 0.4 Stochastic gradient descent
 
 
 ## 1. Tóm tắt nội dung chính 
 
 ### 1.1 Tư tưởng chính 
++ So với mạng LeNet được xuất hiện trước đó, AlexNet đã tăng độ sâu hơn hơn so với LeNet-5. Số lượng filters trên mỗi lớp cũng tăng lên. 
+    - LeNet: 2*{convolutional_layer + pool} + 3*{fully_connected_layer}
+    - AlexNet: 5*{convolutional_layer + MaxPool + ReLU} + 3*{fully_connected_layer}
 
-+ Nhằm giảm thời gian training, bài báo đề xuất sử dụng non-saturating neurons.
-
-+ Hạn chế hiện tượng over-fitting tại lớp fully-connected, tác giả sử dụng phương pháp **dropout** thay cho regularisation. 
-
-+ Cấu trúc mạng AlexNet khá tương đồng với LeNet:
-    - Kích thước của convolution layers giảm dần. 
-    - AlexNet có độ sâu lớn hơn LeNet
-        - Với LeNet: [conv(5x5) -> AvgPool(2x2)] -> [conv(5x5) -> AvgPool(2x2)]
-        - AlexNet: [conv(11x11, padding:4) -> MaxPool(3x3, padding:2)]
-
+    
 ![LeNet vs AlexNet](figures/lenet_alexnet.png)
 
-### 1.3 Các đề xuất của thuật toán 
+
++ Bài báo đề xuất sử dụng non-saturating neurons nhằm giảm thời gian trainning. Ngoài ra, bài báo còn đề xuất các phương pháp khắc phục hiện tượng overfitting như *dropout*
+
++ Hạn chế hiện tượng over-fitting tại lớp fully-connected, tác giả sử dụng phương pháp **dropout** & **data augmentation**
+
+
+
+### 1.2 Các đề xuất của thuật toán 
 
 + AlexNet thay thế hàm kích hoạt *sigmoid()* bằng hàm *ReLU()*. Giúp giảm thời gian training xuống 25%.
 
@@ -73,14 +72,8 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 + Sử dụng *Overlap pooling* nhằm giảm kích thước mạng.
 
-### 1.6 Fine-turning model 
 
-
-## 2. Re-implement
-
-### 2.1 Dataloader 
-
-### 2.2 Re-build & debug model
+### 1.3 Kiến trúc AlexNet
 
 + Kiến trúc mạng AlexNet gồm 8 lớp (5 **Convolutional Layers** + 3 **Fully Connected Layers**):
     - 5 Convolutional Layers:
@@ -89,18 +82,13 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
     - 3 Fully Connected Layers:
         - 2 Fully Connected Layers 
         - 1 SoftMax layer
+
+![AlexNet Architecture](figures/AlexNet-1.png)
+
 + ReLU non-linearity được sử dụng cho tất các conv layers & fully connected layers.
 
 + **Overlapping MaxPooling Layers**:
-    - Thường được sử dụng nhằm giảm kích thước chiều rộng & chiều cao của tensor đầu vào nhưng vẫn giữ được độ sâu. 
-
-### 2.3 Training model 
-
-### 2.4 Measure accuracy 
-
-### 2.5 Fine-turning model 
-
-### 2.6 Source code 
+    - Thường được sử dụng nhằm giảm kích thước chiều rộng & chiều cao của tensor đầu vào nhưng vẫn giữ được độ sâu của output.
 
 
 ## Tham khảo
@@ -112,3 +100,5 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 + [What Is Saturating Gradient Problem](https://datascience.stackexchange.com/questions/27665/what-is-saturating-gradient-problem#:~:text=Saturating%20means%20that%20after%20some,a%20solution%20for%20this%20problem.)
 
 [Understanding AlexNet](https://www.learnopencv.com/understanding-alexnet/#:~:text=AlexNet%20consists%20of%205%20Convolutional,kernels%20of%20the%20same%20size.)
+
+[A Review of Popular Deep Learning Architectures](https://blog.paperspace.com/popular-deep-learning-architectures-alexnet-vgg-googlenet/)
