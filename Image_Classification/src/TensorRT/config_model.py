@@ -14,3 +14,6 @@ train_dir = "/media/doannn/data/Projects/Works/SealProject/Datasets/data_from_in
 valid_dir = "/media/doannn/data/Projects/Works/SealProject/Datasets/data_from_internet/cifar100_imgs/test"
 # test_dir = "dataset/test"
 test_image_path = ""
+
+###             Input datasets
+input_shape = (28, 28, 3)
