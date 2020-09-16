@@ -8,6 +8,8 @@ Trong phần này, chúng ta sẽ đi tìm hiểu các khái niệm xuất hiệ
 ### 0.2 Anchor mechanism & an anchor regression mechanism
 +  Giả sử xét bài toán object detection, mạng neural sẽ đưa ra nhiều dự đoán về vị trí của object dưới dạng các *bouding boxes* hay còn được gọi **region proposal**. Với mỗi anchor box, người ta có thể phân loại thành 2 nhóm *negative* hoặc *positive* thông qua hệ số *Intersection Over Union*. Ngưỡng thường được sử dụng đề xác định là 0.5.
 
++ Anchor box: Là một bounding box cơ sở (có thể xuất hiện/xuất hiện 1 phần object) để xác định bounding box chính của vật thể thông qua các phép dịch tâm & tính toán chiều rộng + chiều dài của bounding box chính.
+
 ![IoU](figures/iou_equation.png)
 
 + Cải thiện *anchor box*:
@@ -15,7 +17,7 @@ Trong phần này, chúng ta sẽ đi tìm hiểu các khái niệm xuất hiệ
     - Ta có thể sử dụng *k-mean* để ước lượng các bounding boxes. Bạn có thể đọc thêm bài báo [MetaAnchor: Learning to Detect Objects with Customized Anchors](https://arxiv.org/pdf/1807.00980.pdf) 
 
 ### 0.1 Region Proposal Network (RPN8)
-+ Xuất hiện lần đầu trong bài báo [Faster RCNN](https://arxiv.org/abs/1506.01497). Tóm gọn về thuật toán *Faster R-CNN*, thay vì sử dụng thuật toán *selective search* người ta sử dụng mạng *Region Proposal Network* đề tìm *region proposal*. 
++ Xuất hiện lần đầu trong bài báo [Faster RCNN](https://arxiv.org/abs/1506.01497). Tóm gọn về thuật toán *Faster R-CNN*, thay vì sử dụng thuật toán *selective search* (được xuất hiện trước đó trong RCNN) người ta sử dụng mạng *Region Proposal Network* đề tìm *region proposals*. Ảnh đầu vào có kích thước bất kì.
 
 ![Faster R-CNN](figures/faster-rcnn.png)
 
@@ -52,7 +54,16 @@ Trong phần này, chúng ta sẽ đi tìm hiểu các khái niệm xuất hiệ
     - Recurrent connectionist text proposal 
     - Side-refinement.
 
++ Mô tả quá trình hoạt động trong mạng CTPN
+
+![CTPN network architecture](figures/CTPN-architecture.jpg)
+
+    - Ảnh đầu vào đi qua pre-train model VGG16 để đưa ra các đặc trưng
+    - Ở tại lớp Conv5 trong model VGG-16, CTPN sử dụng sliding-window (3x3) để trượt trên feature map để đưa ra 1 chuỗi các features
+
+
 ### 2.1 Detecting Text in Fine-Scale Proposals 
++ Hoạt động tương tự như mạng Region Proposal Network, 
 
 ### 2.2 Recurrent Connectionist Text Proposals
 
@@ -68,3 +79,4 @@ Trong phần này, chúng ta sẽ đi tìm hiểu các khái niệm xuất hiệ
 
 [Anchor Boxes — The key to quality object detection](https://medium.com/@andersasac/anchor-boxes-the-key-to-quality-object-detection-ddf9d612d4f9)
 
+[Connectionist Text Proposal Network (CTPN)](https://theailearner.com/2019/10/17/connectionist-text-proposal-network-ctpn/)
