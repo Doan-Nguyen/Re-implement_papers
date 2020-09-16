@@ -56,7 +56,7 @@ Trong phần này, chúng ta sẽ đi tìm hiểu các khái niệm xuất hiệ
 
 ### 2.2 Recurrent Connectionist Text Proposals
 
-### 2.3 
+### 2.3 Side-Refinement
 
 ## 3. Thực thi bài báo 
 
