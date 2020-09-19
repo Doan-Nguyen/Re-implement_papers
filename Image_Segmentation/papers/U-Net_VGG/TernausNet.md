@@ -95,7 +95,8 @@
         - output: in encoder
 
 ### 4. Tính toán hàm mất mát 
-
++ Trước khi đi sâu về mặt toán học của các hàm mất mát, chúng ta nên tìm hiểu về dạng dữ liệu thường sử dụng trong bài toán Segmentation thường xuất hiện trong các cuộc thi trên Kaggle - **Run Length Encode**. Trong thực tế, sau khi thực hiện gán nhãn thủ công cho các dự án, ta nên convert dữ liệu gán nhãn dạng ảnh sang dạng RLE (dạng file .csv).
++ Mình có viết 1 bài chi tiết về  dạng dữ liệu RLE tại [đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/blob/master/RunLengthEncoder.md)
 
 ## III. Tài liệu tham khảo
 
