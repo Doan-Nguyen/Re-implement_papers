@@ -67,14 +67,19 @@
     - Thành phần:
         - [conv_layer1(batch_norm) -> conv_layer2(batch_norm) -> dropout(0.3)]
 
++ Kiến trúc mạng U-Net với VGG-11 đảm nhiệm vai trò encoder:
+![TernausNet](figures/ternausNet.png)
+
 + Một bài viết chi tiết về việc xây dựng U-Net. [Link](https://medium.com/datadriveninvestor/an-overview-on-u-net-architecture-d6caabf7caa4)
 
 #### 3.2 Encoder 
 + Tác giả đã thay đổi kiến trúc mạng VGG-11 để đảm nhiệm vai trò Encoder:
-    - Loại bỏ toàn bộ các lớp *fully-connected layers* & thay thế bởi *conv_layer(1x1)*
+    - Loại bỏ toàn bộ các lớp *fully-connected layers* & thay thế bởi 1 *conv layer(512 channels)*. Lớp *conv layer(512 channels)* này đóng vai trò như phần đáy trong kiến trúc mạng mới.
     - Kết nối các *conv_layer* ở phần encoder với 
 
 ![VGG11](figures/vgg11.png)
+
++ Các lớp được kế thừa từ pre-trained VGG-11 sẽ đứng xen kẽ các lớp được kết nối với decoder bằng cơ chế *skip connection*. 
 
 
 #### 3.2 Decoder
@@ -88,6 +93,8 @@
     - torch.cat([input, output], 1)
         - input: ConvTranspose2d layer 
         - output: in encoder
+
+### 4. Tính toán hàm mất mát 
 
 
 ## III. Tài liệu tham khảo
