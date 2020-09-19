@@ -10,7 +10,7 @@ def conv3x3(in_channels: int, out_channels: int) -> nn.Module:
 
 
 class ConvRelu(nn.Module):
-    """     The path Conv-ReLU in decoder path.     """
+    """     The path Conv(3x3)-ReLU in decoder path.     """
     def __init__(self, in_c: int, out_c: int) -> None:
         super(ConvRelu, self).__init__()
         ##   Modify architecture
@@ -28,7 +28,7 @@ class Decoder(nn.Module):
     - [Conv(3x3) -> ReLU] ~ conv3x3(in_channels, mid_channels)
     - ConvTranspose2d(3x3, stride=2) -> ReLU
     """
-    def __init__(self, in_channels: int, mid_channels: int, out_channels: int):
+    def __init__(self, in_channels: int, mid_channels: int, out_channels: int) -> None:
         super(Decoder, self).__init__()
         ###
         self.decoder_block = nn.Sequential(

@@ -13,7 +13,6 @@ from torch.utils.tensorboard import SummaryWriter
 from .blocks import *
 
 
-
 class UNet_VGG11(nn.Module):
     def __init__(self, num_filters: int = 32, pretrained: bool = False) -> None:
         """     Model using VGG-11 as an encoder. 
