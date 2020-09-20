@@ -1,50 +1,29 @@
-import torch
-import torch.nn as nn
+#       Basic packages
+import sys
+#       Framework
+import tensorflow as tf 
+import tensorflow.keras as keras
+#       Files
+import vgg 
 
-class BasicConvBlock(nn.Module):
-    def __init__(self, 
-                in_channels, 
-                out_channels, 
-                kernel_size, 
-                stride=1,
-                padding=0,
-                dilation=1,
-                groups=1,
-                relu=True,
-                batch_norm=True,
-                bias=True):
-        """
-        Parameters:
-            - in_channels:
-            - out_channels:
-            - dilation:
-            - groups:
-            - bn: 
-        """
-        super(BasicConvBlock, self).__init__()
-        self.out_channels = out_channels, 
-        self.conv = nn.Conv2d(in_channels, 
-                            out_channels, 
-                            kernel_size= kernel_size, 
-                            stride= stride, 
-                            padding= padding,
-                            dilation= dilation, 
-                            groups= groups,
-                            bias= bias)
-        self.batch_norm = nn.BatchNorm2d(
-                            out_channels, 
-                            eps=1e-5, 
-                            momentum=0.1, 
-                            affine=True) if batch_norm else None
-        self.relu = nn.ReLU(inplace=True) if relu else None
-        
-        def forward(self, x):
-            x = self.conv(x)
-            if self.batch_norm is not None:
-                x = self.batch_norƯm(x)
-            if self.relu is not None:
-                x = self.relu(x)
-            
-            return x
 
-            
+def mean_image_subtraction(images, means=[123.68, 116.78, 103.94]):
+    """
+    This function to normalization training datasets. 
+    Makesure datasets same size.
+    """
+    num_channels = images.get_shape().as_list()[-1]
+    if len(means) != num_channels:
+        raise ValueError("Len(means) must match the number of channels")
+    ##      splits a tensor value into a list sub-tensors
+    channels = tf.split(
+        axis=3, 
+        num_or_size_splits=num_channels, 
+        value=images
+    )
+    for i in range(num_channels):
+        channels[i] -= means[i]
+    return tf.concat(axis=3, values=channels)
+
+
+
