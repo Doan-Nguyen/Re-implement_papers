@@ -9,3 +9,4 @@ DATASET_PATH = "/media/doannn/data/Projects/Challenge/tgs-salt-identification-ch
 
 ###         Parameters
 NUMB_CLASSES = 2
+BATCH_SIZE = 32         # to load data generator
