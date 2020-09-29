@@ -9,6 +9,7 @@ import tensorflow as tf
 current_path = Path(os.getcwd())
 sys.path.append(str(current_path))
 import configs_param
+from models.simple_convnet import simple_model
 ##              Logging
 
 
@@ -19,21 +20,14 @@ def test_single_image(img_path):
     Return:
         class_score (float): the predict's probability
     """
-    test_img = tf.io.read_file(img_path)
-    img_tensor = tf.image.decode_jpeg(contents=test_img, channels=configs_param.channels)
-    img_tensor = tf.image.resize(img_tensor, [configs_param.image_height, configs_param.image_width])
+    model = simple_model() # first_test.ckpt
+    print(os.path.join(configs_param.CKPT_DIR, configs_param.MODEL_RESULTS))
+    model.load_weights(os.path.join(configs_param.CKPT_DIR, configs_param.MODEL_RESULTS))
 
-    img_numpy = img_tensor.numpy()
-    img_numpy = (np.expand_dims(img_numpy, 0))
-    img_tensor = tf.convert_to_tensor(img_numpy, tf.float32)
-    img = img_tensor/255.0
-    prob = model(img)
-
-    cls_prob = np.argmax(prob)
+    loss, acc= model.evaluate()
 
     return cls_prob
 
 if __name__ == '__main__':
-    model = tf.keras.models.load_model(os.path.join(configs_param.CKPT_DIR, configs_param.MODEL_RESULTS))
-    cls = test_single_image('/home/doannn/Documents/Public/bitbucket/datasets/cifar100_imgs/test_image/0005.png')
-    print(cls)
+    # /home/datasets/cifar10_imgs/test_image/0001.png
+    prob = test_single_image('/home/datasets/cifar10_imgs/test_image/0001.png')
