@@ -16,7 +16,7 @@ Trong phần này, chúng ta sẽ đi tìm hiểu các khái niệm xuất hiệ
     - Rõ ràng kích thước các object cần detect không cố định. Trước khi đi vào training model, ta cần xác định kích thước lớn nhất & nhỏ nhất của bounding boxes từ tập training datasets.
     - Ta có thể sử dụng *k-mean* để ước lượng các bounding boxes. Bạn có thể đọc thêm bài báo [MetaAnchor: Learning to Detect Objects with Customized Anchors](https://arxiv.org/pdf/1807.00980.pdf) 
 
-### 0.1 Region Proposal Network (RPN8)
+### 0.1 Region Proposal Network (RPN8) & 
 + Xuất hiện lần đầu trong bài báo [Faster RCNN](https://arxiv.org/abs/1506.01497). Tóm gọn về thuật toán *Faster R-CNN*, thay vì sử dụng thuật toán *selective search* (được xuất hiện trước đó trong RCNN) người ta sử dụng mạng *Region Proposal Network* đề tìm *region proposals*. Ảnh đầu vào có kích thước bất kì.
 
 ![Faster R-CNN](figures/faster-rcnn.png)
