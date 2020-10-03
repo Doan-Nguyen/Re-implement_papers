@@ -18,7 +18,9 @@
 
 ## 1.Introduction
 
-+ **Architecture of the CTPN**
++ Architecture of the CTPN
+
+    ![Architecture of CTPN](figures/CTPN-architecture.jpg)
 
     - VGG16 ~> feature maps
 
@@ -72,6 +74,7 @@
 
 
 ### 2.2 Reccurrent Connectionist Text Proposals
+
 + Vấn đề
     - Việc chia nhỏ dòng text thành nhiều *text proposals* & dự đoán mỗi proposal có chứa text hay không có thể sai sót khi khoảng cách giữa các text xa hoặc nhầm lẫn với các đối tượng có cấu trúc *sequence* giống text.
 + **Ý tưởng** 
@@ -89,3 +92,7 @@
     - Bài báo đề xuất sử dụng bi-direction LSTM:
         - Giúp mạng RNN mã hóa nội dung text theo 2 chiều. Ngoài ra còn hạn chế hiện tượng *vanishing gradient*
         - Tác giả sử dụng 128-D hidden layer cho mỗi LSTM -> kết quả: 256-D RNN hidden layer ($$ H_t \in R^256 $$)
+
+### 2.3 Side-Refinement 
+
++ Text line được kết nối từ các *text proposals* có text/non-text score > 0.7.
