@@ -70,29 +70,56 @@
 
             ![Computer Anchor](figures/computer_anchor.png)
         
-        - Ngưỡng threshold cho xác suất chứa text là 0.7 (text/non-text score).
+        - Ngưỡng threshold cho xác suất chứa text của region proposal là 0.7 (text/non-text score).
 
 
 ### 2.2 Reccurrent Connectionist Text Proposals
 
 + Vấn đề
     - Việc chia nhỏ dòng text thành nhiều *text proposals* & dự đoán mỗi proposal có chứa text hay không có thể sai sót khi khoảng cách giữa các text xa hoặc nhầm lẫn với các đối tượng có cấu trúc *sequence* giống text.
+
 + **Ý tưởng** 
     - Bài báo sử dụng mạng hồi tiếp (RNN) để kết nối mỗi vùng *text proposal* như thành phần của từ. Ngoài ra, tác giả sử dụng Long-Short Term Memory để khắc phục sự phụ thuộc xa trong các từ của câu.
+
 + Thiết kế RNN layer trên conv-5:
     - Cập nhật hidden layer thứ *t*:
 
         ![Update hidden layer](figures/update_hidden.png)
 
-        - $$ X_t $$: là vùng convolutional (*conv-5*) feature của cửa số trượt (3x3)
+        - $X_t$: là vùng convolutional (*conv-5*) feature của cửa số trượt (3x3)
         - W: là chiều rộng của conv-5
-        - $$ H_t $$: là hidden state được tính toán từ $$ X_t $$ & hidden state thứ *t-1* $$ H_t-1 $$
-        - $$ \varphi $$: hàm phi tuyến tính xác định form của mạng hồi tiếp.
+        - $H_t$: là hidden state được tính toán từ $X_t$ & hidden state thứ *t-1* $H_t-1$ 
+        - $\varphi$: hàm phi tuyến tính xác định form của mạng hồi tiếp.
     
     - Bài báo đề xuất sử dụng bi-direction LSTM:
         - Giúp mạng RNN mã hóa nội dung text theo 2 chiều. Ngoài ra còn hạn chế hiện tượng *vanishing gradient*
-        - Tác giả sử dụng 128-D hidden layer cho mỗi LSTM -> kết quả: 256-D RNN hidden layer ($$ H_t \in R^256 $$)
+        - Tác giả sử dụng 128-D hidden layer cho mỗi LSTM -> kết quả: 256-D RNN hidden layer ($H_t \in R^256$)
 
 ### 2.3 Side-Refinement 
 
-+ Text line được kết nối từ các *text proposals* có text/non-text score > 0.7.
++ Vấn đề:
+    - Như các phần trên, *fine-scale text proposals* + *RNN* có thể giải quyết tốt đối với *vertical anchors*. Đối với *horizontal direction*, nếu sử dụng chuỗi proposals rộng 16 pixels có thể không bao kín chính xác vùng text (các ảnh hàng thứ 2, 3, 4 trong hình)
+    - Một trường hợp khác, khi chia ảnh thành nhiều proposals 16 pixels. Tránh khả năng mất mát 1 vùng nhỏ nhưng chứa text ở đầu của line text. Bài báo đề xuất phương pháp *sàng lọc biên - side-refinement* 
+
+        ![Side refinement problem](figures/side_refinement1.png)
+
++ Ý tưởng:
+    - Text line được kết nối từ các *text proposals* có text/non-text score > 0.7.
+
++ Quá trình xây dựng các text lines (bounding box):
+    - Step 1: Xác định *Text proposal* hàng xóm:
+        - Khoảng cách giữa 2 proposals phải nhỏ nhất
+        - Khoảng cách này < 50 pixels.
+        - Vectical overlap > 0.7
+    - Step 2: Điều kiện 2 proposal boxes ghép cặp:
+        - Cả 2 proposals đều thỏa mãn điều kiện hàng xóm của nhau.
+
++ Công thức tính toán phần bù ở 2 proposals biên:
+    - Công thức tính offset:
+
+        ![Side refinement off-set](figures/side_refinement2.png)
+
+        - $x_side$: tọa độ dự đoán trục x của chiều ngang gần nhất với anchor hiện tại.
+        - $x^{*}_side$: tọa độ lề ground truth theo trục x.
+        - $c^{a}_x$: tâm anchor theo trục x.
+        - $w^{a}$: chiều rộng của anchor
