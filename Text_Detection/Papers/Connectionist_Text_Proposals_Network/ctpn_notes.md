@@ -1,13 +1,6 @@
 # Detecting Text in Natural Image with Connectionist Text Proposal Network
 
 
-## Đánh giá quá trình phát triền (để sau)
-+ Quan điểm cá nhân chia các thuật toán Text Detection thành 3 nhóm:
-    - Xác định text proposals bởi các mạng CNN như R-CNN với cơ chế **Region Proposal Network**.
-    - 
-    - 
-
-
 ## Sơ lược về thuật toán 
 + Ý tưởng chính của thuật toán chia nhỏ thành nhiều phần & dự đoán khả năng xuất hiện text trong từng phần. Từ các phần được dự đoán chứa text sẽ kết nối chúng lại thành 1 dòng. 
 
@@ -119,7 +112,33 @@
 
         ![Side refinement off-set](figures/side_refinement2.png)
 
+        - $o$: offset
         - $x_side$: tọa độ dự đoán trục x của chiều ngang gần nhất với anchor hiện tại.
         - $x^{*}_side$: tọa độ lề ground truth theo trục x.
         - $c^{a}_x$: tâm anchor theo trục x.
         - $w^{a}$: chiều rộng của anchor
+
+### 2.4 Model Outputs & Loss Function
++ Ý tưởng: 
+    - Tổng hợp các phần trên, mô hình CTPN trả về (k- số lượng anchors):
+        - Text/non-text score (**s**)
+        - Vertical coordinates  (**v**)
+        - Side-refinement offset (**o**)
+    - Mỗi kết quả trả về tương đương với một loss function tương ứng. Loss của mô hình sẽ là tổng của 3 loss tương ứng với 3 kết quả đầu ra.
++ Tính toán:
+    - Gọi $L^lc_s$, $L^re_v$, $L^re_o$ lần lượt là loss của text/non-text score, coordinate & side-refinement. Loss của mô hình $L$ sẽ trờ thành loss của multi-task. Công thức tính:
+        ![ctpn loss](figures/model_loss.png)
+
+    - $i$: chỉ số của anchor
+    - $s_i$: xác suất dự đoán của anchor thứ *i*
+    - $s^*_j = {0, 1}$: ground truth
+    
+
+## Đánh giá quá trình phát triền
++ Quan điểm cá nhân chia các thuật toán Text Detection thành 2 nhóm:
+    - Xác định text proposals bởi các mạng CNN sử dụng các bounding boxes như R-CNN với cơ chế **Region Proposal Network**.
+        - Tốc độ xử lý nhanh.
+    - Xác định text bởi phương pháp segmetation:
+        - Coi chuỗi các kí tự là vùng cần segmentation: [PixelLink](https://arxiv.org/pdf/1801.01315.pdf), [Linking-Segments](https://arxiv.org/pdf/1703.06520.pdf)
+        - Coi tâm kí tự là vùng segmentation: [CRAFT]()
+        - Tốc độ xử lý chậm nhưng độ chính xác & giải quyết nhiều trường hợp phức tạp về vị trí/hình dạng hơn.
