@@ -5,9 +5,8 @@
 
 Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đề cập đến trong paper. Deeper !
 
-### 0.1 
 
-#### 0.1.1 Non-Saturating & Saturating neurons
+### 0.1 Non-Saturating & Saturating neurons
 
 + Hầu hết các kiến trúc mạng neuron trong machine learning sử dụng hàm kích hoạt phi tuyến tính cho việc kết hợp các đầu vào tuyến tính. Công thức phổ biến mọi người biết đến: 
 
@@ -37,6 +36,7 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 + Được hiểu là kĩ thuật giúp ẩn đi các unit trong mô hình. Việc ẩn ở đây được hiểu các unit sẽ có giá trị 0.
 
 ### 0.3 Local Response Normalization
++ 
 
 ### 0.4 Stochastic gradient descent
 
