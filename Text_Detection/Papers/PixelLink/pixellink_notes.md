@@ -1,21 +1,33 @@
 # PixelLink: Detecting Scence Text via Instance Segmentation
 
+
 ## 0. Các khái niệm cần làm rõ
 
 ### 0.1 Instance segmentation
 
 + Thực hiện nhận diện các đối tượng ở cấp độ điểm ảnh, mỗi đối tượng sẽ có 1 vùng các điểm ảnh riêng. Khác với *semantic segmentation* chỉ nhận diện 1 đối tượng duy nhất trong ảnh, *instance segmentation* sẽ nhận diện nhiều đối tượng trong cùng 1 ảnh.
-        ![Semantic & instance segmentation](figures/sematic_vs_instance.png)
-        [Nguồn](https://towardsdatascience.com/understanding-semantic-segmentation-with-unet-6be4f42d4b47)
 
+    ![Semantic & instance segmentation](figures/sematic_vs_instance.png)
+        
+    [Nguồn](https://towardsdatascience.com/understanding-semantic-segmentation-with-unet-6be4f42d4b47)
 
 ### 0.2 Regression-based
 + Có thể hiểu là vị trí của vùng đối tượng được suy ra từ các bounding boxes mà mô hình dự đoán. 
 
-### 0.3 Location Regression
+### 0.3 Soft max
 
-### 0.4 minAreaRect
+### 0.4 Feature fusion layers
++ Có thể hiểu như việc kết hợp đặc trưng của các pretrained model để phục vụ cho việc học mới. Một ví dụ về **feature fusion** được đề cập trong bài báo [Feature Extraction and Fusion Using Deep Convolutional Neural Networks for Face Detection](https://www.hindawi.com/journals/mpe/2017/1376726/). 
 
+    ![Feature fusion](figures/feature_fusion.png)
++ Từ khóa này mình sẽ làm rõ trong chủ đề về **Transfer Learning*, mọi người có thể đọc ở [đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/blob/master/Topics/TransferLearning/transfer_learning.md). 
+
+### PixelLink+VGG16-2s & PixelLink+VGG16-4s
++ PixelLink+VGG16 2s: 
+    - Có kích thước bằng 1 nửa ảnh gốc. 
+
++ PixelLink+VGG16 4s:
+    - Có kích thước bằng 1/4 ảnh gốc.
 
 
 ## 1. Sơ lược về bài toán 
@@ -33,7 +45,7 @@
         - text/non text score
         - character classes
         - character linking orientations 
-    - Nói thêm, với bài toán nhận diện chữ tiếng Nhật, detect orientations đóng vai trò quan trọng vì nó sẽ giải quyết chữ dọc. Với thuật toán CTPN mà mình đã phân tích, nó không giải quyết trường hợp này nhưng bù lại vì sử dụng *cơ chế vertical anchor* trong chuỗi thuật toán R-CNN nên có thể cải thiện về mặt tốc độ (thú thật cái này mình đoán nhé).
+    - Nói thêm, với bài toán nhận diện chữ tiếng Nhật, detect orientations đóng vai trò quan trọng vì nó quyết định mô hình có xác định vị trí với trường hợp chữ dọc hay khống. Thuật toán CTPN mà mình đã phân tích, nó không giải quyết trường hợp này nhưng bù lại vì sử dụng *cơ chế vertical anchor* trong chuỗi thuật toán R-CNN nên có thể cải thiện về mặt tốc độ so với PixelLink.
 
 + Ý tưởng thuật toán PixelLink đề xuất:
     - Vấn đề:
@@ -45,14 +57,26 @@
                 - Việc liên kết các điểm ảnh diễn ra giữa điểm ảnh đang xét với 8 điểm ảnh *hàng xóm*.
                 - Xét 2 cặp điểm ảnh {điểm ảnh trung tâm, 1 trong 8 điểm ảnh}.
                     - Nếu nằm cùng một kí tự trong text (nguyên gốc: *same instance*) sẽ được đánh nhãn *positive* & ngược lại.
-                - Các điểm ảnh được gán nhãn *positive*
+                - Các điểm ảnh được gán nhãn *positive* sẽ được join vào cùng *Connected Components*
+                - Mỗi một *Connected Components* được coi như 1 text.
+
 
 ## 3. Phân tích thuật toán 
++ Bài toán Text Detection chuyển về bài toán *Instance Segmentation*, mô tả thuật toán gồm 2 bước:
+    - Xác định tập hợp điểm ảnh được gán nhãn *positive*.
+    - Nhóm chúng lại với nhau bởi việc xác định tính *positive links*. 
+    - Từ các vùng instance segmentation vẽ các bounding boxes.
 
-### 3.1 Kiến trúc thuật toán 
+### 3.1 Kiến trúc thuật toán
++ Tương tự như SegLink, PixelLink sử dụng VGG-16 làm nhiệm vụ phân tích đặc trưng:
+    - Thay thế các lớp $fc_6$, $fc_7$ thành lớp *convolutional*.
 
 ### 3.2 Kết nối các Pixels 
 
 ### 
 
 ## 4. Tối ưu thuật toán
+
+## Tài liệu tham khảo
+[]()
+[Transfer learning](https://forum.machinelearningcoban.com/t/tong-hop-transfer-learning/5388)
