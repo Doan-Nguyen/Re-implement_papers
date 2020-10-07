@@ -20,7 +20,7 @@ def vgg_pretrained():
     ###     Get pre-trained VGG-16
     model_vgg16_conv = VGG16(
             weights='imagenet',
-            include_top=False)
+            include_top=False)  # remote the last fully connected layer
     model_vgg16_conv.summary()
     #   get new inputs datasets
     input = Input(
@@ -40,4 +40,7 @@ def vgg_pretrained():
     new_model.summary()
 
     return new_model
+
+if __name__ == "__main__":
+        vgg_pretrained()
     

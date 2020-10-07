@@ -5,8 +5,32 @@
 
 ###  1. Các thành phần trong mạng U-Net 
 
-+ Anh Phạm Đình Khánh đã viết 1 bài rất chi tiết, mọi người có thể tham khảo ở [đây](https://phamdinhkhanh.github.io/2020/06/10/ImageSegmention.html#4-thu%E1%BA%ADt-ng%E1%BB%AF)
 
+### 1.1 Upsampling
++ Upsampling: kĩ thuật giúp tăng kích thước output trong mạng CNN. 
++ Upsampling 2d layer: có thể hiểu tương tự với hàm *resize()*, nhưng cho ra output có kích thước lớn hơn bằng cách coppy các điểm ảnh gần kề.
+    ![Upsampling](figures/Up_sampling.png)
++ Một vài kĩ thuật upsampling khác như:
+    - Bilinear interpolation: biến đổi tuyến tính nội suy tất cả các điểm ảnh.
+
+
+### 1.2 Mạng giả tích chập (Deconvolutional Neural Network)
++ Nếu như mạng CNN có nhiệm vụ extract ra feature maps. Mạng giả tích chập có khả năng chuyển từ feature map trả về ảnh. 
++ Mạng giả tích chập có kích thước các layer tăng dần. Các layer trong mạng sẽ giải mã đặc trưng thành thông tin từng điểm ảnh của ảnh output.
+
+    ![deconvolutional neural network](figures/deconv.png)
+
++ Quay lại với mạng U-Net, nhánh bên trái có nhiệm vụ phân tách đặc trưng từ ảnh đầu vào, nhánh bên phải có nhiệm vụ khôi phục ảnh đầu ra.
+
+
+### 1.3 Transposed Convolutional (tích chập chuyển vị)
++ Tích chập chuyển vị có thể coi như quá trình ngược của tích chập thông thường. Thay vì mỗi features mapping sang pixels ảnh thì ngược lại từ pixels ảnh sang feature.
+
+    ![Transposed](figures/transposed_conv1.png)
+
++ Minh họa sự hoạt động của tích chập chuyển vị:
+    
+    ![Transposed visualize](figures/visualizing_transposed.png)
 ### 2. Ảnh hưởng của việc sử dụng Initialize Weights
 
 #### 2.1 Tầm quan trọng của việc khởi tạo trọng số 
@@ -20,9 +44,6 @@
     - Vanishing gradient: xảy ra khi giá trị gradient nhỏ dần đều (becomes close to zeros) qua mỗi lần tính backpropagation. Độ thay đổi của weights không đáng kể -> mô hình k hội tụ được. [Link tham khảo thêm](https://towardsdatascience.com/the-vanishing-gradient-problem-69bf08b15484)
 + Mình có viết một bài chi tiết hơn về **Initializer Weights** [tại đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/tree/master/Topics/Initialize_Weights).
 
-### 3. Kiến trúc VGG 
-
-### 4. Skip connections 
 
 
 ## II. Explain paper 
