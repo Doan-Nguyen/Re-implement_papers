@@ -20,7 +20,7 @@
 + Có thể hiểu như việc kết hợp đặc trưng của các pretrained model để phục vụ cho việc học mới. Một ví dụ về **feature fusion** được đề cập trong bài báo [Feature Extraction and Fusion Using Deep Convolutional Neural Networks for Face Detection](https://www.hindawi.com/journals/mpe/2017/1376726/). 
 
     ![Feature fusion](figures/feature_fusion.png)
-+ Từ khóa này mình sẽ làm rõ trong chủ đề về **Transfer Learning*, mọi người có thể đọc ở [đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/blob/master/Topics/TransferLearning/transfer_learning.md). 
++ Để tránh loãng bài viết, từ khóa này mình sẽ làm rõ (cập nhật) trong chủ đề về **Transfer Learning**, mọi người có thể đọc ở [đây](https://github.com/Doan-Nguyen/Deep_Learning_Notes/blob/master/Topics/TransferLearning/transfer_learning.md). 
 
 ### PixelLink+VGG16-2s & PixelLink+VGG16-4s
 + PixelLink+VGG16 2s: 
@@ -69,7 +69,13 @@
 
 ### 3.1 Kiến trúc thuật toán
 + Tương tự như SegLink, PixelLink sử dụng VGG-16 làm nhiệm vụ phân tích đặc trưng:
-    - Thay thế các lớp $fc_6$, $fc_7$ thành lớp *convolutional*.
+    - Thay thế các lớp *fc_6*, *fc_7* thành lớp *convolutional*.
++ Từ việc lựa chọn các lớp convolutional từ mạng VGG-16 kết nối với lớp *fc_7* tạo thành 2 cách thức *feature fusion*:
+    - **PixelLink+VGG16 2s**: *{conv2 2, conv3 3, conv4 3, conv5 3, fc 7}*
+    - **PixelLink+VGG16 4s**: *{conv3 3,conv4 3, conv5 3, fc 7}*
+
++ Kiến trúc của *PixelLink+VGG16 2s*:
+    ![PixelLink+VGG16 2s](figures/pixellink_vgg16_2s.png)
 
 ### 3.2 Kết nối các Pixels 
 
