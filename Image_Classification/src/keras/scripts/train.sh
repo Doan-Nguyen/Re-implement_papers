@@ -1,1 +1,0 @@
-python ../main/train.py
