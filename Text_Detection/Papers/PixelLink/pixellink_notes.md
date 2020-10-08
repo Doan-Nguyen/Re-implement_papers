@@ -55,7 +55,7 @@
             - text/non-text prediction {các điểm ảnh trong vùng text xuất hiện được gán nhãn *positive* & ngược lại}
             - link prediction
                 - Việc liên kết các điểm ảnh diễn ra giữa điểm ảnh đang xét với 8 điểm ảnh *hàng xóm*.
-                - Xét 2 cặp điểm ảnh {điểm ảnh trung tâm, 1 trong 8 điểm ảnh}.
+                - Xét 2 cặp điểm ảnh {điểm ảnh trung tâm, 1 trong 8 điểm ảnh hàng xóm}.
                     - Nếu nằm cùng một kí tự trong text (nguyên gốc: *same instance*) sẽ được đánh nhãn *positive* & ngược lại.
                 - Các điểm ảnh được gán nhãn *positive* sẽ được join vào cùng *Connected Components*
                 - Mỗi một *Connected Components* được coi như 1 text.
@@ -67,6 +67,17 @@
     - Nhóm chúng lại với nhau bởi việc xác định tính *positive links*. 
     - Từ các vùng instance segmentation vẽ các bounding boxes.
 
++ Kiến trúc của PixelLink:
+    ![Architecture of PixelLink](figures/architecture_of_pixelLink.png)
+
+    + CNN: sử dụng pretrained, nhiệm vụ dự đoán các điểm pixels:
+        - Text/non-text prediction
+        - Link prediction
+    + Thuật toán sử dụng 1 ngưỡng threshold để phân cụm các điểm positive pixels rồi từ đó liên kết lại với nhau bằng positive links.
+        - Kết quả của positive links sẽ tạo thành các *instance segmentation*.
+        - Sử dụng *minAreaRect* để vẽ các bounding boxes cho các *instance segmentation*.
+    + Sử dụng *Post Filtering* sau segmentation để giảm nhiễu dự đoán.
+
 ### 3.1 Kiến trúc thuật toán
 + Tương tự như SegLink, PixelLink sử dụng VGG-16 làm nhiệm vụ phân tích đặc trưng:
     - Thay thế các lớp *fc_6*, *fc_7* thành lớp *convolutional*.
@@ -74,12 +85,27 @@
     - **PixelLink+VGG16 2s**: *{conv2 2, conv3 3, conv4 3, conv5 3, fc 7}*
     - **PixelLink+VGG16 4s**: *{conv3 3,conv4 3, conv5 3, fc 7}*
 
++ Model cho ra output 2 dự đoán độc lập:
+    - Text/non-text prediction
+    - Link prediction
+
 + Kiến trúc của *PixelLink+VGG16 2s*:
     ![PixelLink+VGG16 2s](figures/pixellink_vgg16_2s.png)
 
-### 3.2 Kết nối các Pixels 
+    - Các lớp *fc_6* & *fc_7* được converted sang convolutional layers.
 
-### 
+### 3.2 Kết nối các Pixels 
++ Từ 2 kết quả dự đoán ở bước 1, mô hình thiết lập 2 mức ngưỡng tương đương cho mỗi output dự đoán:
+    - Positive pixels được nhóm lại cùng nhau nhờ sử dụng *positive links*.
+    - Mỗi vùng sau khi *positive link* được coi như một *Colection component - CC*, đại diện cho 1 text instance.
+
+### 3.3 Phân tích các vùng instance segmentation thành các bounding boxes.
++ Bài báo đề xuất sử dụng hàm *minAreaRect* trong OpenCV đề vẽ bounding boxes cho *colection components*. Ở đây, bounding boxes được vẽ trực tiếp từ *instance segmentation*.
+
+### 3.4 Post Filtering (Lọc lại) sau khi Segmentation
++ Từ các bounding boxes tìm được nhờ *minAreaRect*, bài báo đề xuất lọc thêm một bước về kích thước của bounding boxes.
+    - Độ rộng của các instance > 10 pixels
+    - Diện tích của instance < 300.
 
 ## 4. Tối ưu thuật toán
 
