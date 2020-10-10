@@ -1,6 +1,0 @@
-(512, 512) ['Conv2D', 'Conv2D']
-(256, 256) ['MaxPooling2D', 'Conv2D', 'Conv2D']
-(128, 128) ['MaxPooling2D', 'Conv2D', 'Conv2D', 'Conv2D']
-(64, 64) ['MaxPooling2D', 'Conv2D', 'Conv2D', 'Conv2D']
-(32, 32) ['MaxPooling2D', 'Conv2D', 'Conv2D', 'Conv2D']
-(16, 16) ['MaxPooling2D']
