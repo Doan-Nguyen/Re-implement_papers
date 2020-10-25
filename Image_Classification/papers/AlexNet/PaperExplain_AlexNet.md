@@ -44,6 +44,7 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
     - N: số lượng filters của layer này.
     - $a^i_(x,y)$: neuron output ở vị trí (x, y)
 
++ Việc sử dụng Local Normalization còn giúp mô hình hội tụ nhanh hơn.
 
 
 ## 1. Tóm tắt nội dung chính 
@@ -66,6 +67,8 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 + AlexNet thay thế hàm kích hoạt *sigmoid()* bằng hàm *ReLU()*. Giúp giảm thời gian training xuống 25%.
     - Giảm việc tính toán bởi *ReLU()* không cho phép lũy thừa như trong *sigmod()* $e^x$.
+        - Đạo hàm chỉ có 2 giá trị: 1 hoặc 0
+        ![ReLU](figures/relu.png)
     - ReLU giúp cho việc huấn luyện mô hình dễ dàng hơn khi sử dụng các phương thức khởi tạo tham số khác nhau.
     - Giúp tránh *vanishing gradient*.
 
