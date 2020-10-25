@@ -36,9 +36,14 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 + Được hiểu là kĩ thuật giúp ẩn đi các unit trong mô hình. Việc ẩn ở đây được hiểu các unit sẽ có giá trị 0.
 
 ### 0.3 Local Response Normalization
-+ 
++ Sau khi qua activation ReLU, mỗi neuron sau khi được tính tích chập sẽ được normalize dựa trên các neuron cùng vị trí trên trục channels.
++ Công thức normalize:
+    ![Local Respone Normalization](figures/local_response_normalization.png)
+    
+    - n: output lân cận 
+    - N: số lượng filters của layer này.
+    - $a^i_(x,y)$: neuron output ở vị trí (x, y)
 
-### 0.4 Stochastic gradient descent
 
 
 ## 1. Tóm tắt nội dung chính 
@@ -57,10 +62,12 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 + Hạn chế hiện tượng over-fitting tại lớp fully-connected, tác giả sử dụng phương pháp **dropout** & **data augmentation**
 
 
-
 ### 1.2 Các đề xuất của thuật toán 
 
 + AlexNet thay thế hàm kích hoạt *sigmoid()* bằng hàm *ReLU()*. Giúp giảm thời gian training xuống 25%.
+    - Giảm việc tính toán bởi *ReLU()* không cho phép lũy thừa như trong *sigmod()* $e^x$.
+    - ReLU giúp cho việc huấn luyện mô hình dễ dàng hơn khi sử dụng các phương thức khởi tạo tham số khác nhau.
+    - Giúp tránh *vanishing gradient*.
 
 ![Instead sigmoid by ReLU](figures/instead_sigmoid_relu.png)
 
@@ -77,6 +84,7 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 
 + Kiến trúc mạng AlexNet gồm 8 lớp (5 **Convolutional Layers** + 3 **Fully Connected Layers**):
     - 5 Convolutional Layers:
+        - Cửa số tích chập lớn 11x11
         - Hai lớp conv đầu tiên & lớp thứ 5 được kết nối thêm **Overlapping MaxPooling Layers**
         - Ba lớp conv cuối được nối trực tiếp với nhau
     - 3 Fully Connected Layers:
@@ -102,3 +110,5 @@ Phần này chúng ta sẽ đi làm rõ các kiến thức/nội dung nhỏ đ�
 [Understanding AlexNet](https://www.learnopencv.com/understanding-alexnet/#:~:text=AlexNet%20consists%20of%205%20Convolutional,kernels%20of%20the%20same%20size.)
 
 [A Review of Popular Deep Learning Architectures](https://blog.paperspace.com/popular-deep-learning-architectures-alexnet-vgg-googlenet/)
+
+[Convolution Neural Network : AlexNet](https://trantheanh.github.io/2018/05/10/ML-22/)
